@@ -8,6 +8,8 @@
 $ yarn install
 $ yarn start
 ```
+## 진행상황
+- 현재 크롬 웹스토어 검토중
 
 ## Demo
 <img src ="./coinDemo.gif">
