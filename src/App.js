@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import Typography from "@material-ui/core/Typography";
+import SearchBar from "./Components/SearchBar";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{ flex: 1 }}>
+        <div style={{marginTop:10, marginBottom:5}}>
+          <Typography variant="body2">상사몰래 코인하기 </Typography>
+          <Typography variant="body2">upbit 기준 가격정보입니다.</Typography>
+        </div>
+        <SearchBar />
+      </div>
     </div>
   );
 }
