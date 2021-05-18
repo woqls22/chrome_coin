@@ -8,6 +8,7 @@ import {
   Button,
   Table,
   TableCell,
+  TableHead,
   TableRow,
   Typography,
 } from "@material-ui/core";
@@ -36,6 +37,15 @@ const useStyles = makeStyles((theme) => ({
 //   </TableRow>
 // );
 // }
+function convertToPercent(num: string) {
+  let tmp = num;
+  if ((parseFloat(tmp) * 100).toString().length > 5 && !(parseFloat(tmp) * 100).toString().includes("-")) {
+    return "+"+(parseFloat(tmp) * 100).toString().substr(0, 4) + "%";
+  }else if ((parseFloat(tmp) * 100).toString().length > 6 && (parseFloat(tmp) * 100).toString().includes("-")) {
+    return (parseFloat(tmp) * 100).toString().substr(0, 5) + "%";
+  }
+  return (parseFloat(tmp) * 100).toString() + "%";
+}
 export default function SearchBar() {
   const classes = useStyles();
   const [text, setText] = useState("비트코인");
@@ -90,13 +100,18 @@ export default function SearchBar() {
         setNowPrice(res);
       });
     }
-    console.log(nowPrice);
     setSearchList(result);
   }
   return (
     <>
       <div style={{ display: "flex" }}>
-        <SearchIcon style={{ marginTop: "auto", marginRight: "0.5rem" }} />
+        <SearchIcon
+          style={{
+            marginTop: "auto",
+            marginRight: "0.5rem",
+            marginLeft: "4rem",
+          }}
+        />
         <TextField
           label="코인명 검색"
           id="standard-size-small"
@@ -114,7 +129,22 @@ export default function SearchBar() {
                     {text.length > 1 && (
                       <TableRow>
                         <TableCell>
-                          <Typography variant="caption">{findName(data.market)} /</Typography>
+                          <Typography variant="caption">
+                            {findName(data.market)}
+                            {"      " + data.market}{" "}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                        {data.prev_closing_price == data.trade_price ?<>
+                          <Typography
+                            variant="caption"
+                          >
+                            {" "}
+                            {data.trade_price
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "￦"}
+                          </Typography>
+                        </>:<>
                           <Typography
                             variant="caption"
                             color={
@@ -126,10 +156,35 @@ export default function SearchBar() {
                             {" "}
                             {data.trade_price
                               .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'￦'}
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "￦"}
                           </Typography>
+                        </>}
+                         
                         </TableCell>
-
+                        <TableCell>
+                          {data.prev_closing_price == data.trade_price ? (
+                            <>
+                              <Typography variant="caption">
+                                {"0.00%"}
+                              </Typography>
+                            </>
+                          ) : (
+                            <>
+                              <Typography
+                                variant="caption"
+                                color={
+                                  data.prev_closing_price > data.trade_price
+                                    ? "primary"
+                                    : "secondary"
+                                }
+                              >
+                                {convertToPercent(
+                                  data.signed_change_rate.toString()
+                                )}
+                              </Typography>
+                            </>
+                          )}
+                        </TableCell>
                       </TableRow>
                     )}
                   </>

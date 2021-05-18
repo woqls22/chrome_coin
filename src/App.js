@@ -8,7 +8,7 @@ function App() {
       <div style={{ flex: 1 }}>
         <div style={{marginTop:10, marginBottom:5}}>
           <Typography variant="body2">상사몰래 코인하기 </Typography>
-          <Typography variant="body2">upbit 기준 가격정보입니다.</Typography>
+          <Typography variant="caption">From Upbit 변동률 : 09:00 기준</Typography>
         </div>
         <SearchBar />
       </div>
