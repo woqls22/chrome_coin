@@ -8,6 +8,10 @@
 $ yarn install
 $ yarn start
 ```
+
+## Browser Support
+- Chrome
+
 ## Issue
 - 업비트 원화마켓 상장 코인 지원
 - 초당 5회 가격 정보 업데이트
