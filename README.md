@@ -11,7 +11,8 @@ $ yarn start
 ## Issue
 - 업비트 원화마켓 상장 코인 지원
 - 초당 5회 가격 정보 업데이트
-- 현재 크롬 웹스토어 게시 검토중
+- 현재 크롬 웹스토어 게시됨
+- https://chrome.google.com/webstore/detail/chromecoin/anjndelckdpnnpkcpokehhedocobkloh
 
 ## Demo
 <img src ="./coinDemo.gif">
