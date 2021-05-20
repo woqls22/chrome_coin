@@ -23,7 +23,7 @@ $ yarn start
 - 20.05.18 : 변동률 추가 수정
 - 20.05.20 : 투명도 조절 기능, 초성검색 기능 추가, 즐겨찾기 기능 추가
 ## Demo
-<img src ="./demo2.gif">
+<img src ="./demo4.gif">
 
 <img src ="./demo2.png">
 
