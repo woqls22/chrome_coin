@@ -4,7 +4,8 @@ export default class CoinInfoDO {
   constructor(
     public market: string,
     public korean_name: string,
-    public english_name: string
+    public english_name: string,
+    public cho_kor:string="",
   ) {}
 }
 const headers = {

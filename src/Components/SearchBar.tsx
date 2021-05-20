@@ -22,20 +22,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-// const CoinRow=(data:CoinInfoDO)=>{
-//   const [nowPrice,setNowPrice]=useState("1");
-//   useEffect(()=>{
-//     getCoinPrice(data.market,(res:CoinPrice)=>{
-//       setNowPrice(res.trade_price);
-//     })
-//   })
-// return (
-//   <TableRow>
-//     <TableCell><Button style={{fontSize:"9pt"}}>{data.korean_name} / {data.market}</Button></TableCell>
-//     <TableCell style={{fontSize:"9pt"}}>{nowPrice}</TableCell>
-//     <TableCell><Button><BookmarkBorderIcon/></Button></TableCell>
-//   </TableRow>
-// );
+// function cho_hangul(str:string) {
+//   let cho = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+//   let result = "";
+//   for(var i=0;i<str.length;i++) {
+//     let code = str.charCodeAt(i)-44032;
+//     if(code>-1 && code<11172) result += cho[Math.floor(code/588)];
+//   }
+//   return result;
 // }
 function convertToPercent(num: string) {
   let tmp = num;
@@ -69,7 +63,7 @@ export default function SearchBar() {
     return "";
   };
   useEffect(() => {
-    CoinStore.fetchCoinList();
+    CoinStore.fetchCoinList().then(()=>CoinStore.setChoHangul());
   }, []);
   function findCode(text: string) {
     let result: CoinInfoDO[] = [];
@@ -77,7 +71,7 @@ export default function SearchBar() {
     for (var i = 0; i < CoinStore.coinList.length; i++) {
       if (
         CoinStore.coinList[i].korean_name.startsWith(text) ||
-        CoinStore.coinList[i].english_name.startsWith(text)
+        CoinStore.coinList[i].english_name.startsWith(text) || CoinStore.coinList[i].cho_kor.startsWith(text)
       ) {
         if (
           !stringList.includes(CoinStore.coinList[i].korean_name) &&
@@ -121,7 +115,7 @@ export default function SearchBar() {
       </div>
       {CoinStore.coinList.length > 0 && text.length > 1 ? (
         <>
-          <div style={{ maxHeight: "200px", overflow: "auto" }}>
+          <div style={{ maxHeight: "250px", overflow: "auto" }}>
             <Table>
               {nowPrice.map((data: CoinPrice) => {
                 return (
