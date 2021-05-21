@@ -198,14 +198,14 @@ export default function SearchBar() {
       {CoinStore.coinList.length > 0 && text.length > 1 ? (
         <>
           <div style={{ maxHeight: "250px", overflow: "auto" }}>
-            <Table>
+            <Table padding="none">
               {nowPrice.map((data: CoinPrice) => {
                 return (
                   <>
                     {text.length > 1 && (
                       <TableRow>
-                        <TableCell>
-                          <Typography variant="caption">
+                        <TableCell >
+                          <Typography variant="caption"style={{marginLeft:"8pt"}}>
                             {findName(data.market)}
                             {"      " + data.market}{" "}
                           </Typography>
@@ -278,14 +278,14 @@ export default function SearchBar() {
       ) : (
         <>
           <div style={{ maxHeight: "250px", overflow: "auto" }}>
-            <Table>
+            <Table padding="none">
               {bookMarked.map((data: CoinPrice) => {
                 return (
                   <>
                     {bookMarked.length > 0 && (
                       <TableRow>
-                        <TableCell>
-                          <Typography variant="caption">
+                        <TableCell  >
+                          <Typography variant="caption" style={{marginLeft:"8pt"}}>
                             {findName(data.market)}
                             {"      " + data.market}{" "}
                           </Typography>
