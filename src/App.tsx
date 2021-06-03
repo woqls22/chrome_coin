@@ -10,25 +10,30 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 
 function App() {
   const [value, setValue] = useState(100);
-  const [invisibleTitle, setInvisibleTitle] = useState("visible");
-  const handleSliderChange = (event, newValue) => {
+  const [invisibleTitle, setInvisibleTitle] = useState("100");
+  const handleSliderChange = (event:any, newValue:any) => {
     if (newValue > 10) {
       setValue(newValue);
+      chrome.storage.local.set({ opacity: newValue }, () => {});
     }
   };
-  const handleTextVisibilityChange = (event) => {
+  const handleTextVisibilityChange = (event:any) => {
     if (event.target.checked == true) {
-      setInvisibleTitle("hidden");
+      setInvisibleTitle("0");
     } else {
-      setInvisibleTitle("visible");
+      setInvisibleTitle("1");
     }
   };
-
+  useEffect(()=>{
+    chrome.storage.local.get(["opacity"], (res) => {
+      setValue(res.opacity)
+    });
+  },[])
   return (
     <div className="App">
       <div style={{ flex: 1, opacity: value * 0.01 }}>
         <div style={{ marginTop: 10, marginBottom: 5 }}>
-          <Typography variant="body2" style={{ visibility: invisibleTitle }}>
+          <Typography variant="body2"  style={{ opacity: invisibleTitle }}>
             상사몰래 코인하기{" "}
           </Typography>
           <Typography variant="caption">
